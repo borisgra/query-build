@@ -39,6 +39,7 @@ CMD ["./query-gra"]
 #ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
 
 
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master  -t borisgra/query-gra:git-jdk .
 # sudo docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/query-build.git#master --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
 # sudo docker login -u borisgra
 # sudo docker push borisgra/query-gra:git-jdk
