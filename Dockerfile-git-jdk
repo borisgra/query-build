@@ -26,7 +26,8 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY --from=my-jdk /customjre $JAVA_HOME
 
-COPY --from=project ./build/install/query-gra /app/
+COPY --from=project ./query-gra /app/
+#COPY --from=project ./build/install/query-gra /app/
 
 RUN chmod -R 777 /app/
 
@@ -38,7 +39,7 @@ CMD ["./query-gra"]
 #ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
 
 
-# sudo docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/jvm-js-fullstack.git#build --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
+# sudo docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/query-build.git#master --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
 # sudo docker login -u borisgra
 # sudo docker push borisgra/query-gra:git-jdk
 # sudo docker pull borisgra/query-gra:git-jdk
