@@ -1,0 +1,21 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Dockerfile-my-jdk" type="docker-deploy" factoryName="dockerfile" server-name="Docker-22.04">
+    <deployment type="dockerfile">
+      <settings>
+        <option name="imageTag" value="borisgra/query-gra:1.2-jre-22-kotlin-2.0.10-pre-791-test" />
+        <option name="containerName" value="my-jdk" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="5004" />
+              <option name="hostPort" value="5004" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="commandLineOptions" value="--env-file .env" />
+        <option name="sourceFilePath" value="Dockerfile-my-jdk" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

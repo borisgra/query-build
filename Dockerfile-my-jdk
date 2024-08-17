@@ -1,4 +1,5 @@
-# !!!! Create image after build PRRODUCTON in IntelliJ - from github.com/borisgra/jvm-js-fullstack
+# !!!! Create image after build PRRODUCTON in IntelliJ - copy  from ./build/install/query-gra
+#https://stackoverflow.com/questions/71577703/how-do-i-make-a-artifact-stored-in-googles-artifact-registry-public
 FROM eclipse-temurin:22.0.1_8-jdk-alpine AS my-jdk
 
 # required for strip-debug to work
@@ -26,9 +27,9 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY --from=my-jdk /customjre $JAVA_HOME
 
-COPY --from=project ./build/install/query-gra /app/
+COPY --chmod=777 ./query-gra /app/
 
-RUN chmod -R 777 /app/
+# RUN chmod -R 777 /app/
 
 WORKDIR /app/bin
 
@@ -38,9 +39,12 @@ CMD ["./query-gra"]
 #ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
 
 
-# sudo docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/jvm-js-fullstack.git#build --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
+# sudo docker build -f ./Dockerfile-my-jdk -t borisgra/query-gra:latest .
+# sudo docker buildx build -f ./Dockerfile-my-jdk --progress=plain -t borisgra/query-gra:latest . 2>&1 | tee build.log
+# sudo docker buildx build -f ./Dockerfile-my-jdk --no-cache -t borisgra/query-gra:latest .
 # sudo docker login -u borisgra
-# sudo docker push borisgra/query-gra:git-jdk
-# sudo docker pull borisgra/query-gra:git-jdk
-# sudo docker run borisgra/query-gra:git-jdk -p 5004:5004
+# sudo docker push borisgra/query-gra:latest
+# sudo docker pull borisgra/query-gra:latest
+# sudo docker run borisgra/query-gra:latest -p 5004:5004
 #docker builder prune  # clear cache
+
