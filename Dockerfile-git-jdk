@@ -39,6 +39,8 @@ EXPOSE 9090
 CMD ["./query-gra"]
 #ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
 
+# wget -qO- https://raw.githubusercontent.com/borisgra/query-build/master/Dockerfile-git-jdk | docker buildx build -f -  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master -t borisgra/query-gra:git-jdk .
+
 # docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master  -t borisgra/query-gra:git-jdk .
 # docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/query-build.git#master -t borisgra/query-gra:git-jdk .
 # docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra: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@github.com/borisgra/jvm-js-fullstack.git#build -t borisgra/query-gra:git-jdk .
