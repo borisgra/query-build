@@ -26,9 +26,11 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 COPY --from=my-jdk /customjre $JAVA_HOME
 
-COPY --from=project ./build/install/query-gra /app/
+COPY --from=project --chmod=777 ./query-gra /app/
+#COPY --from=project --chmod=777 ./build/install/query-gra /app/
 
-RUN chmod -R 777 /app/
+#COPY --from=project  ./query-gra /app/
+#RUN chmod -R 777 /app/
 
 WORKDIR /app/bin
 
@@ -37,10 +39,14 @@ EXPOSE 9090
 CMD ["./query-gra"]
 #ENTRYPOINT [ "java", "-jar", "query-gra.jar" ]
 
-
-# sudo docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/jvm-js-fullstack.git#build --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
-# sudo docker login -u borisgra
-# sudo docker push borisgra/query-gra:git-jdk
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra@github.com/borisgra/query-build.git#master  -t borisgra/query-gra:git-jdk .
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/query-build.git#master -t borisgra/query-gra:git-jdk .
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra: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@github.com/borisgra/jvm-js-fullstack.git#build -t borisgra/query-gra:git-jdk .
+# docker login -u borisgra
+# docker push borisgra/query-gra:git-jdk
 # sudo docker pull borisgra/query-gra:git-jdk
 # sudo docker run borisgra/query-gra:git-jdk -p 5004:5004
 #docker builder prune  # clear cache
+
+# docker buildx build -f ./Dockerfile-git-jdk  --build-context project=https://borisgra:<gihub_token>@github.com/borisgra/jvm-js-fullstack.git#build --progress=plain -t borisgra/query-gra:git-jdk . 2>&1 | tee build.log
+# df -h --total
